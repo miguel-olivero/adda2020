@@ -333,16 +333,25 @@ public class Math2 {
 	 * @return Si a es primo
 	 */
 	public static boolean esPrimo(Integer a){
+		if(a<1){
+			throw new IllegalArgumentException("El numero (" + a.toString() + ") no puede usarse como entrada para esta funcion. Use enteros positivos.");
+		}
 		Integer sqrt = (int)Math.sqrt((double)a);
 		return IntStream.rangeClosed(2, sqrt).noneMatch(x->Math2.esDivisible(a, x));
 	}
 	
 	public static boolean esPrimo(Long a){
+		if(a<1){
+			throw new IllegalArgumentException("El numero (" + a.toString() + ") no puede usarse como entrada para esta funcion. Use enteros positivos.");
+		}
 		Long sqrt = (long)Math.sqrt((double)a);
 		return LongStream.rangeClosed(2, sqrt).noneMatch(x->Math2.esDivisible(a, x));
 	}
 	
 	public static boolean esPrimo(BigInteger a){
+		if(a.compareTo(BigInteger.ONE)<0){
+			throw new IllegalArgumentException("El numero (" + a.toString() + ") no puede usarse como entrada para esta funcion. Use enteros positivos.");
+		}
 		return a.isProbablePrime(100);
 	}
 	
@@ -352,16 +361,25 @@ public class Math2 {
 	 */
 	
 	public static Integer siguientePrimo(Integer a){
+		if(a<1){
+			throw new IllegalArgumentException("El numero (" + a.toString() + ") no puede usarse como entrada para esta funcion. Use enteros positivos.");
+		}
 		a = (a+1)%2==0?a+2:a+1;
 		return Stream.iterate(a, x->x+2).filter(x->Math2.esPrimo(x)).findFirst().get();
 	}
 	
 	public static Long siguientePrimo(Long a){
+		if(a<1){
+			throw new IllegalArgumentException("El numero (" + a.toString() + ") no puede usarse como entrada para esta funcion. Use enteros positivos.");
+		}
 		a = (a+1)%2==0?a+2:a+1;
 		return Stream.iterate(a, x->x+2).filter(x->Math2.esPrimo(x)).findFirst().get();
 	}
 	
 	public static BigInteger siguientePrimo(BigInteger a){
+		if(a.compareTo(BigInteger.ONE)<0){
+			throw new IllegalArgumentException("El numero (" + a.toString() + ") no puede usarse como entrada para esta funcion. Use enteros positivos.");
+		}
 		return a.nextProbablePrime();
 	}
 	
